@@ -102,7 +102,7 @@ DemoRoom: {
          npcA: new Person({
            x: utils.withGrid(7),
             y: utils.withGrid(9),
-           src: "/Wimages/characters/Mon1.png",
+           src: "/Colorless/Wimages/characters/Mon1.png",
           // behaviorLoop: [
            // { type: "stand", direction: "left", time: 800 },
             //{ type: "stand", direction: "up", time: 800 },
@@ -122,7 +122,7 @@ DemoRoom: {
         npcB: new Person({
             x: utils.withGrid(2),
              y: utils.withGrid(6),
-            src: "/Wimages/characters/Mon2.png",
+            src: "/Colorless/Wimages/characters/Mon2.png",
             //behaviorLoop: [
             //    { type: "walk", direction: "left" },
             //    { type: "stand", direction: "up", time: 800},
@@ -206,8 +206,8 @@ DemoRoom: {
     },
 },
     Forest:{
-lowerSrc: "/Wimages/maps/ForestLower.png",
-upperSrc: "/Wimages/maps/ForestUpper.png",
+lowerSrc: "/Colorless/Wimages/maps/ForestLower.png",
+upperSrc: "/Colorless/Wimages/maps/ForestUpper.png",
 gameObjects:{
     hero: new Person({
         isPlayerControlled: true,
