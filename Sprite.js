@@ -12,7 +12,7 @@ class Sprite{
 
         this.shadow = new Image();
         this.useShadow = true;
-        this.shadow.src = "Wimages/characters/shadow.png";
+        this.shadow.src = "Colorless/Wimages/characters/shadow.png";
         this.shadow.onload = () =>{
             this.isShadowLoaded = true;
         }
