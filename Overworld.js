@@ -79,7 +79,7 @@ startMap(mapConfig){
 
    this.map.startCutscene([
     
-     {type: "battle",}
+ 
 
     ])
 
