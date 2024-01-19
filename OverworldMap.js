@@ -113,7 +113,7 @@ DemoRoom: {
            { 
             events:[
                 {type: "textMessage", text: "Im busy...", faceHero: "npcA"},
-                {type: "textMessage", text: "GTFO"},
+                {type: "textMessage", text: "Go away please."},
                 {   who: "hero", type: "walk", direction: "left"},
             ]
             },
