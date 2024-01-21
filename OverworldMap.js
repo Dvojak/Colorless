@@ -107,7 +107,7 @@ DemoRoom: {
          npcA: new Person({
            x: utils.withGrid(7),
             y: utils.withGrid(9),
-           src: "/Wimages/characters/Mon1.png",
+           src: "Wimages/characters/Mon1.png",
           // behaviorLoop: [
            // { type: "stand", direction: "left", time: 800 },
             //{ type: "stand", direction: "up", time: 800 },
@@ -129,7 +129,7 @@ DemoRoom: {
         npcB: new Person({
             x: utils.withGrid(2),
              y: utils.withGrid(6),
-            src: "/Wimages/characters/Mon2.png",
+            src: "Wimages/characters/Mon2.png",
             //behaviorLoop: [
             //    { type: "walk", direction: "left" },
             //    { type: "stand", direction: "up", time: 800},
@@ -215,8 +215,8 @@ DemoRoom: {
     },
 },
     Forest:{
-lowerSrc: "/Wimages/maps/ForestLower.png",
-upperSrc: "/Wimages/maps/ForestUpper.png",
+lowerSrc: "Wimages/maps/ForestLower.png",
+upperSrc: "Wimages/maps/ForestUpper.png",
 gameObjects:{
     hero: new Person({
         isPlayerControlled: true,
@@ -226,7 +226,7 @@ gameObjects:{
     npcA: new Person({
       x: utils.withGrid(17),
       y: utils.withGrid(15), 
-      src: "/Wimages/characters/Mon1.png", 
+      src: "Wimages/characters/Mon1.png", 
       talking: [
         { 
          events:[
@@ -244,7 +244,7 @@ gameObjects:{
     npcB: new Person({
         x: utils.withGrid(10),
         y: utils.withGrid(15), 
-        src: "/Wimages/characters/Mon2.png", 
+        src: "Wimages/characters/Mon2.png", 
     }),
 
 },
