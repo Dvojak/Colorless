@@ -6,7 +6,7 @@ this.element = config.element;
  this.map = null;
 }
 
-//Herní loop, která vykresluje frames
+//Game loop, it refreshes frames
 startGameLoop(){
     const step = () => {
 
@@ -43,7 +43,7 @@ startGameLoop(){
     }
     step();
 }
-// Kontroluje jestli se dá mluvit s osobou před námi 
+// Checks if there is person that can be interacted with 
 bindActionInput(){
     new KeyPressListener("Enter", () =>{
         //Is there person to talk to?
@@ -51,7 +51,7 @@ bindActionInput(){
     })
 }
 
-//Kontroluje jestli je na poli kde postavá stojí nějaká cutscene
+//Checks if there is some cutscene on place that he is standing on
 bindHeroPositionCheck(){
     document.addEventListener("PersonWalkingComplete", e =>{
         if (e.detail.whoId === "hero"){
@@ -59,13 +59,14 @@ bindHeroPositionCheck(){
         }
     })
 }
-//Zapíná  mapu
+//Starts map
 startMap(mapConfig){
     this.map = new OverworldMap(mapConfig);
    this.map.overworld = this;
     this.map.mountObjects();
 
 }
+//Initializes stuff before starting everything
  init(){
     this.startMap(window.OverworldMaps.DemoRoom)
   
@@ -76,10 +77,11 @@ startMap(mapConfig){
    this.directionInput.init();
     this.startGameLoop();
 
-
+    //I am using this to test each new event 
    this.map.startCutscene([
-    
- 
+
+    //Started working on battle event but it is not done yet
+     //{type: "battle",}
 
     ])
 

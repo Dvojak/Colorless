@@ -1,4 +1,5 @@
 class GameObject{
+    //Creates game object
     constructor(config){
         this.id = null;
         this.isMounted = false;
@@ -33,31 +34,33 @@ class GameObject{
     update() {
     
     }
-    async doBehaviorEvent(map){
+    async doBehaviorEvent(map) { 
 
-        //Dont do anything if there is a more important cutscene or i dont have config
-        //to do anything anyway.
-        if (map.isCutscenePlaying || this.behaviorLoop.length === 0 || this.isStanding){
-            return;
+        //Don't do anything if there is a more important cutscene or I don't have config to do anything
+        //anyway.
+        if (map.isCutscenePlaying || this.behaviorLoop.length === 0 || this.isStanding) {
+          return;
         }
-
-        //Seting up our event with relevant info
+    
+        //Setting up our event with relevant info
         let eventConfig = this.behaviorLoop[this.behaviorLoopIndex];
         eventConfig.who = this.id;
-
-
+    
         //Create an event instance out of our next event config
         const eventHandler = new OverworldEvent({ map, event: eventConfig });
-        await eventHandler.init();
-
+        await eventHandler.init(); 
+    
         //Setting the next event to fire
         this.behaviorLoopIndex += 1;
-        if(this.behaviorLoopIndex === this.behaviorLoop.length){
-            this.behaviorLoopIndex = 0;
-        }
+        if (this.behaviorLoopIndex === this.behaviorLoop.length) {
+          this.behaviorLoopIndex = 0;
+        } 
+    
         //Do it again!
         this.doBehaviorEvent(map);
-    }
+        
+    
+      }
 
 
 }

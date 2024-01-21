@@ -1,3 +1,5 @@
+
+//This whole makes screen fade to white when changing map
 class SceneTransition{
     constructor(){
         this.element = null;

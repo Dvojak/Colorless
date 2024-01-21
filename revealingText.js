@@ -8,7 +8,7 @@ class RevealingText{
         this.isDone = false;
 
     }
-
+    //This reveals slowly characters in text messages so it look like the character is talking
     revealOneCharacter(list){
         const next =  list.splice(0,1)[0];
         next.span.classList.add("revealed");
@@ -21,7 +21,7 @@ class RevealingText{
         this.isDone = true;
         }
     }
-
+    //If you press enter it instantly jumps to the end of the message
     warpToDone(){
         clearTimeout(this.timeout);
         this.isDone = true;
@@ -30,7 +30,7 @@ class RevealingText{
         })
     }
 
-
+    //initializes the stuff needed for this to work
     init(){
         let characters = [];
         this.text.split("").forEach(character => {

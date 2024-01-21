@@ -1,3 +1,5 @@
+
+//Checks if key is pressed and hold down
 class KeyPressListener{
     constructor(keyCode, callback){
         let keySafe = true

@@ -1,3 +1,5 @@
+
+//initialize everything
 (function (){
 
 const overworld = new Overworld({

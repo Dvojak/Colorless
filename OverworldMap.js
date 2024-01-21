@@ -13,14 +13,14 @@ class OverworldMap{
 
         this.isCutscenePlaying = false;
     }
-
+    //Draw images
     drawLowerImage(ctx, cameraPerson){
         ctx.drawImage(this.lowerImage,utils.withGrid(10.5) - cameraPerson.x,utils.withGrid(6) - cameraPerson.y)
     }
     drawUpperImage(ctx, cameraPerson){
         ctx.drawImage(this.upperImage,utils.withGrid(10.5) - cameraPerson.x,utils.withGrid(6) - cameraPerson.y)
     }
-
+    //Check if space is currently taken
     isSpaceTaken(currentX,currentY,direction){
         const {x,y} = utils.nextPosition(currentX,currentY,direction);
         return this.walls[`${x}, ${y}`] || false;
@@ -35,7 +35,8 @@ class OverworldMap{
             object.mount(this);
         })
     }
-
+    //Starts cutscene
+    //If cutscene is playing, player cannot make any action
     async startCutscene(events){
         this.isCutscenePlaying = true;
     
@@ -54,7 +55,7 @@ class OverworldMap{
     }
 
     
-
+    //This checks for cutscene that is triggered by interacting with something
     checkForActionCutscene(){
         const hero = this.gameObjects["hero"];
         const nextCords = utils.nextPosition(hero.x, hero.y, hero.direction);
@@ -65,7 +66,7 @@ class OverworldMap{
             this.startCutscene(match.talking[0].events)
         }
     }
-
+    //This checks for cutscene that is triggered by walking upon certain tile
     checkForFootstepCutscene(){
         const hero = this.gameObjects["hero"];
         const match = this.cutsceneSpaces[ `${hero.x}, ${hero.y}` ];
@@ -74,7 +75,7 @@ class OverworldMap{
         }
     }
 
-
+    //Few functions that work with walls
     addWall(x,y){
         this.walls[`${x}, ${y}`] = true;
     }
@@ -90,30 +91,36 @@ class OverworldMap{
 }
 
 window.OverworldMaps = {
+//This is one big cluster of information about map    
 DemoRoom: {
+    //Map that you will see
     lowerSrc: "Wimages/maps/DemoLower.png",
     upperSrc: "Wimages/maps/DemoUpper.png",
+    //Game objects that will be on that map, can be People or objects
     gameObjects: {
         hero: new Person({
             isPlayerControlled: true,
+            //Coordinations that shows where the certain object will be
             x: utils.withGrid(5),
             y: utils.withGrid(6),  
           }),
          npcA: new Person({
            x: utils.withGrid(7),
             y: utils.withGrid(9),
-           src: "Wimages/characters/Mon1.png",
+           src: "/Wimages/characters/Mon1.png",
           // behaviorLoop: [
            // { type: "stand", direction: "left", time: 800 },
             //{ type: "stand", direction: "up", time: 800 },
             //{ type: "stand", direction: "right", time: 1200 },
             //{ type: "stand", direction: "up", time: 300 },
            //],
+           
+           //Certain event that will happen if being interacted with
            talking: [
            { 
             events:[
                 {type: "textMessage", text: "Im busy...", faceHero: "npcA"},
-                {type: "textMessage", text: "Go away please."},
+                {type: "textMessage", text: "GTFO"},
                 {   who: "hero", type: "walk", direction: "left"},
             ]
             },
@@ -122,7 +129,7 @@ DemoRoom: {
         npcB: new Person({
             x: utils.withGrid(2),
              y: utils.withGrid(6),
-            src: "Wimages/characters/Mon2.png",
+            src: "/Wimages/characters/Mon2.png",
             //behaviorLoop: [
             //    { type: "walk", direction: "left" },
             //    { type: "stand", direction: "up", time: 800},
@@ -132,6 +139,7 @@ DemoRoom: {
             //]
          }),
     },
+    //This shows where walls will be
     walls: {
         [utils.asGridCord(7,6)] : true,
         [utils.asGridCord(8,6)] : true,
@@ -173,6 +181,7 @@ DemoRoom: {
 
 
     },
+    //Spaces that will trigger cutscenes or certain events like changing a map
     cutsceneSpaces: {
         [utils.asGridCord(2,5)]:[
             {
@@ -206,14 +215,49 @@ DemoRoom: {
     },
 },
     Forest:{
-lowerSrc: "Wimages/maps/ForestLower.png",
-upperSrc: "Wimages/maps/ForestUpper.png",
+lowerSrc: "/Wimages/maps/ForestLower.png",
+upperSrc: "/Wimages/maps/ForestUpper.png",
 gameObjects:{
     hero: new Person({
         isPlayerControlled: true,
       x: utils.withGrid(33),
       y: utils.withGrid(10),  
     }),
+    npcA: new Person({
+      x: utils.withGrid(17),
+      y: utils.withGrid(15), 
+      src: "/Wimages/characters/Mon1.png", 
+      talking: [
+        { 
+         events:[
+             {type: "textMessage", text: "Bro, you should not see mee.", faceHero: "npcA"},
+             {type: "textMessage", text: "Go away please."},
+             {type: "textMessage", text: "Go along like you cannot see me."},
+             {type: "textMessage", text: "Shooo."},
+             {   who: "hero", type: "walk", direction:  "right"},
+         ]
+         },
+        ]
+    
+    
+    }),
+    npcB: new Person({
+        x: utils.withGrid(10),
+        y: utils.withGrid(15), 
+        src: "/Wimages/characters/Mon2.png", 
+    }),
+
+},
+walls: {
+    [utils.asGridCord(31,9)] : true, 
+    [utils.asGridCord(30,9)] : true,
+    [utils.asGridCord(34,9)] : true,
+    [utils.asGridCord(35,9)] : true,
+    [utils.asGridCord(36,8)] : true,
+    [utils.asGridCord(36,7)] : true,     
+
+
+
 
 },
 cutsceneSpaces: {
@@ -233,7 +277,53 @@ cutsceneSpaces: {
 
             ]
         }
-    ]
+    ],
+    [utils.asGridCord(17,17)]: [
+    {
+        events: [
+            {who: "npcA", type: "walk", direction: "left"},
+            {who: "npcA", type: "walk", direction: "left"},
+            {who: "npcA", type: "walk", direction: "down"},
+            {who: "npcA", type: "walk", direction: "down"},
+            {who: "npcA", type: "walk", direction: "right"},
+            {who: "npcA", type: "stand", direction: "left", time: 500},
+            {type: "textMessage", text: "HA, you did not expect me did ya boy.", faceHero: "npcA"},
+            {type: "textMessage", text: "Well, nice seeing ya, see ya.", faceHero: "npcA"},
+            {who: "npcA", type: "walk", direction: "left"},
+            {who: "npcA", type: "walk", direction: "up"},
+            {who: "npcA", type: "walk", direction: "up"},
+            {who: "npcA", type: "walk", direction: "right"},
+            {who: "npcA", type: "walk", direction: "right"},
+            {who: "npcA", type: "stand", direction: "down", time: 500},
+
+        ],
+        
+    }
+    ],
+    [utils.asGridCord(17,18)]: [
+        {
+            events: [
+                {who: "npcA", type: "walk", direction: "left"},
+                {who: "npcA", type: "walk", direction: "left"},
+                {who: "npcA", type: "walk", direction: "down"},
+                {who: "npcA", type: "walk", direction: "down"},
+                {who: "npcA", type: "walk", direction: "down"},
+                {who: "npcA", type: "walk", direction: "right"},
+                {who: "npcA", type: "stand", direction: "left", time: 500},
+                {type: "textMessage", text: "HA, you did not expect me did ya boy.", faceHero: "npcA"},
+                {type: "textMessage", text: "Well, nice seeing ya, see ya.", faceHero: "npcA"},
+                {who: "npcA", type: "walk", direction: "left"},
+                {who: "npcA", type: "walk", direction: "up"},
+                {who: "npcA", type: "walk", direction: "up"},
+                {who: "npcA", type: "walk", direction: "up"},
+                {who: "npcA", type: "walk", direction: "right"},
+                {who: "npcA", type: "walk", direction: "right"},
+                {who: "npcA", type: "stand", direction: "down", time: 500},
+    
+            ],
+            
+        }
+        ]
     
 },
 

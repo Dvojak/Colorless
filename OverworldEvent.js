@@ -1,9 +1,11 @@
+
+//Overworld events are here mainly for programing NPCs and directing cutsenes
 class OverworldEvent{
     constructor({map, event}){
         this.map = map;
         this.event = event;
     }
-
+    //Event for person to stand in set direction for set amount of time
     stand(resolve){
         const who = this.map.gameObjects[ this.event.who ];
         who.startBehavior({ map: this.map}, {
@@ -22,7 +24,7 @@ class OverworldEvent{
 
         document.addEventListener("PersonStandComplete", completeHandler)
     }
-
+    //Event for person to walk in set direction of one 16*16 tile
     walk(resolve){
         const who = this.map.gameObjects[ this.event.who ];
         who.startBehavior({ map: this.map}, {
@@ -41,7 +43,7 @@ class OverworldEvent{
 
         document.addEventListener("PersonWalkingComplete", completeHandler)
     }
-
+    //Event for text message show up with set text
     textMessage(resolve){
 
         if(this.event.faceHero){
@@ -56,7 +58,7 @@ class OverworldEvent{
         })
         message.init( document.querySelector(".game-container") )
     }
-
+    //Event for changing set map
     changeMap(resolve){
 
         const sceneTransition = new SceneTransition();
@@ -69,8 +71,8 @@ class OverworldEvent{
 
       
     }
-    
-   /* battle(resolve){
+    //Event to start battle 
+    battle(resolve){
         const battle = new Battle({
             onComplete: () => {
                 resolve();
@@ -78,8 +80,8 @@ class OverworldEvent{
 
         })
         battle.init(document.querySelector(".game-container"));
-    }*/
-
+    }
+    //Initialization
     init(){
         return new Promise(resolve => {
             this[this.event.type](resolve)

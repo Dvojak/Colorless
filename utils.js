@@ -1,10 +1,13 @@
 const utils = {
+    //Changes number to tile format
     withGrid(n){
         return n * 16;
     },
+    //Makes coordination into exact tile
     asGridCord(x,y){
         return `${x*16}, ${y*16}`
     },
+    //Lets us know what is in front of us
     nextPosition(initialX, initialY, direction){
         let x = initialX;
         let y = initialY;
@@ -23,6 +26,7 @@ const utils = {
         }
         return {x,y};
     },
+    //It can allow us to make something look at us
     oppositeDirection(direction){
         if(direction === "left"){return "right"}
         if(direction === "right"){return "left"}

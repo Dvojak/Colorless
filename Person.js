@@ -1,3 +1,5 @@
+
+//It takes thing from game objects and adds upon them
 class Person extends GameObject {
     constructor(config){
         super(config);
@@ -6,6 +8,7 @@ class Person extends GameObject {
 
         this.isPlayerControlled = config.isPlayerControlled || false;
 
+        //Allows them to change position by adding and subtracting x and y
         this.directionUpdate = {
             "up": ["y", -1],
             "down": ["y", 1],
@@ -14,6 +17,7 @@ class Person extends GameObject {
         }
     }
 
+    //Updates moving people
     update(state){
         if (this.movingProgressRemaining > 0){
         this.updatePosition();
@@ -31,7 +35,7 @@ class Person extends GameObject {
           
       
     }
-   
+   //Starts certain behavior that is setted up
     startBehavior(state, behavior){
         this.direction = behavior.direction;
         if(behavior.type === "walk"){
@@ -64,7 +68,8 @@ class Person extends GameObject {
 
     }
     
-
+    //This constatly updates position of person so it looks like it walk towards a tile 
+    //And it doesnt look like its teleporting
     updatePosition(){
       
             const [property, change] = this.directionUpdate[this.direction];
@@ -81,7 +86,7 @@ class Person extends GameObject {
             }
        
     }
-
+    //This updates sprite so it has animation and look more normal
     updateSprite(){
         if(this.movingProgressRemaining > 0){
             this.sprite.setAnimation("walk-"+this.direction);

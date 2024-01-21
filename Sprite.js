@@ -19,6 +19,8 @@ class Sprite{
  
         //Configure Animation & Initial State
         this.animations = config.animations || {
+            //These coordinates show point to one 32*32 tile that contains a png of a character 
+            //Which means that if you set few after each other it can create animation
             "idle-down": [[0,0]],
             "idle-right": [[0,1]],
             "idle-up": [[0,2]],
@@ -28,20 +30,21 @@ class Sprite{
             "walk-up": [[1,2], [2,2], [3,2], [0,2]],
             "walk-left":[[0,3], [3,3], [2,3], [1,3]],
         }
-        this.currentAnimations = "idle-down";// config.currentAnimation || "idleDown";
+        //Makes characters defaultly idle down
+        this.currentAnimations = "idle-down";
         this.currentAnimationFrame = 0;
-
+        //Here we can configure animation limit and thanks to that we can make the animation more faster or slower
         this.animationFrameLimit = config.animationFrameLimit || 16;
         this.animationFrameProgress = this.animationFrameLimit;
 
         //Reference the game object
         this.gameObject = config.gameObject;
     }
-
+    //This gets the current frame that we are on
     get frame(){
         return this.animations[this.currentAnimations][this.currentAnimationFrame];
     }
-    
+    //It sets up the animation that we want 
     setAnimation(key){
         if(this.currentAnimations !== key){
             this.currentAnimations = key;
@@ -49,7 +52,7 @@ class Sprite{
             this.animationFrameProgress = this.animationFrameLimit;
         }
     }
-
+    //Updates the animation progress
     updateAnimationProgress(){
         //Downtick frame progress
         if(this.animationFrameProgress > 0){
@@ -64,7 +67,7 @@ class Sprite{
             this.currentAnimationFrame = 0;
         }
     }
-
+    //Draw the animation
     draw(ctx, cameraPerson){
         const x = this.gameObject.x - 8 + utils.withGrid(10.5) - cameraPerson.x;
         const y = this.gameObject.y - 18 + utils.withGrid(6) - cameraPerson.y;

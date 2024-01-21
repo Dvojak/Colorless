@@ -4,7 +4,7 @@ class TextMessage{
         this.onComplete = onComplete;
         this.element = null;
     }
-
+    //Here we create the box that text messages are in
     createElement(){
         this.element = document.createElement("div");
         this.element.classList.add("TextMessage");
@@ -31,9 +31,9 @@ class TextMessage{
         })
     }
 
-
+    //This checks if a text is done or not.
+    //If its done, then by pressing enter we can go to next message, and if not, it jumps to the end of the message
     done(){
-
         if(this.revealingText.isDone){
             this.element.remove();
             this.actionListener.unbind();
